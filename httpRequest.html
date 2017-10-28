@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+//Globale Variable deklarieren:
+var xhr = new XMLHttpRequest();
+function main() {
+		
+	var ipadresse=inputform.ipadresse.value;	
+	
+	if(ipadresse!="")
+	{
+		starturl="//ipinfo.io/"+ipadresse+"/json";
+	}
+	else
+	{
+		starturl="//ipinfo.io/json";
+	}
+
+	  xhr.open('GET',starturl, true);	  
+	  xhr.send();
+  		
+	  //Event Handler deklarieren
+	  xhr.addEventListener("readystatechange", processRequest, false);
+	  
+	  
+
+
+   
+}
+
+ function processRequest(e) { 
+		  
+		
+		  
+		  if (xhr.readyState == 4 && xhr.status == 200 ) {
+		  
+		   
+				var response = JSON.parse(xhr.responseText);		
+				var result="Aktuelle IP: "+ response.ip+"<br>";
+				var result=result+"Hostname: "+ response.hostname+"<br>";
+				var result=result+"city: "+ response.city+"<br>";
+				var result=result+"region: "+ response.region+"<br>";
+				var result=result+"country: "+ response.country+"<br>";
+				var result=result+"loc: "+ response.loc+"<br>";
+				var result=result+"org: "+ response.org+"<br>";
+				var result=result+"postal: "+ response.postal+"<br>";
+			  
+			   document.getElementById("demo").innerHTML = result;
+			   
+		    }
+		  
+	  }
+	  
+</script>
+</head>
+
+<body>
+	<h1>Beispiel fuer XMLHttpRequest unter JavaScirpt</h1> 
+	Wenn IP-Adresse leer, dann wird die eigene IP-Adresse abgefragt:
+	
+	
+	
+		<form name="inputform">
+
+		IP-Adresse: <input type="text" name="ipadresse" size="5" value="8.8.8.8">
+		
+		<input type="button" value="Code starten"
+		   onClick="main()">
+		</form>
+		
+
+	<p id="demo">Ausgabe</p>
+	
+	<a href="https://www.kirupa.com/html5/making_http_requests_js.htm" target="_blank">Quelle: Making HTTP Requests in JavaScript</a><br>
+	<a href="https://goo.gl/q9uGvs" target="_blank">XMLHttpRequest cannot load file. Cross origin requests are only supported for HTTP</a>
+	Zum Test wurde ein Localer Pyhton Server installiert. (Run a Local Server with Python)
+
+	
+	<h5>Liste der ReadyStates.</h5>
+
+	<table id="smileysTable" class="centerImage">
+	  <tr>
+		<th width="56">Value</th>
+		<th width="169" align="left">State</th>
+		<th width="407" align="left">Description</th>
+		</tr>
+	  <tr>
+		<td> 0</td>
+		<td align="left">UNSENT</td>
+		<td align="left">The open method hasn't been called yet</td>
+		</tr>
+	  <tr>
+		<td> 1</td>
+		<td align="left">OPENED</td>
+		<td align="left">The send method has been called</td>
+		</tr>
+	  <tr>
+		<td> 2</td>
+		<td align="left">HEADERS_RECEIVED</td>
+		<td align="left">The send method has been called and the HTTP request has returned the status and headers</td>
+		</tr>
+	  <tr>
+		<td> 3</td>
+		<td align="left">LOADING</td>
+		<td align="left">The HTTP request response is being downloaded</td>
+		</tr>
+	  <tr>
+		<td> 4</td>
+		<td align="left">DONE</td>
+		<td align="left">Everything has completed</td>
+		</tr>
+	</table>
+</body>
+</html> 
