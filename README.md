@@ -1,1 +1,2 @@
 # LearningJavaScript
+# Some changes
